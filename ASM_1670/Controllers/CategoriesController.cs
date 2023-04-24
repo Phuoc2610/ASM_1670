@@ -1,12 +1,12 @@
-﻿using ASM_APP_DEV.Data;
-using ASM_APP_DEV.Enums;
-using ASM_APP_DEV.Models;
+﻿using ASM_1670.Data;
+using ASM_1670.Enums;
+using ASM_1670.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASM_APP_DEV.Controllers
+namespace ASM_1670.Controllers
 {
     public class CategoriesController : Controller
     {
@@ -27,32 +27,6 @@ namespace ASM_APP_DEV.Controllers
             return View(categoriesInDb); 
         }
 
-        //Create Category Data
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(Category category)
-        {
-            var currentUser = await userManager.GetUserAsync(User);
-
-            category.UserId = currentUser.Id;
-            category.CategoryStatus = CategoryStatus.Unconfirmed;
-            dbContext.Categories.Add(category);
-            dbContext.SaveChanges();
-            return RedirectToAction("Index", "Categories");
-        }
-
-        //Delete Category Data
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var category = dbContext.Categories.FirstOrDefault(c => c.Id == id);
-            dbContext.Remove(category);
-            dbContext.SaveChanges();
-            return RedirectToAction("Index", "Categories");
-        }
+       
     }
 }
