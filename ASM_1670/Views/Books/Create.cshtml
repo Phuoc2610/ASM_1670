@@ -1,0 +1,137 @@
+﻿@using ASM_APP_DEV.ViewModels
+@model CategoriesBookViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<div  >
+    <div class="img">
+        <img src="https://demo.w3layouts.com/demos_new/template_demo/24-01-2018/library_membership_form-demo_Free/902134896/web/images/bg.jpg" alt="#">
+    </div>
+    <div class="content container">
+        <h1>Create Books</h1>
+        <form class="row container-fluid" asp-action="Create">
+
+            <div class="col-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label Model.Book.NameBook" class="control-label">Name Book</label>
+                    <input asp-for="Book.NameBook" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label Model.Book.QuantityBook" class="control-label">Quantity</label>
+                    <input asp-for="Book.QuantityBook" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label Model.Book.PriceBook" class="control-label">Price</label>
+                    <input asp-for="Book.PriceBook" class="form-control" />
+                </div>
+                <div class="form-group dropdown">
+
+                    <div class="form-group">
+                        <label class="control-label">Category</label>
+                        <select asp-for="Book.IdCategory"
+                                asp-items="@(new SelectList(Model.Categories,"Id", "NameCategory"))"
+                                class="form-control">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+
+                <div class="form-group">
+
+                    <label Model.Book.InformationBook" class="control-label">Information</label>
+                    <textarea asp-for="Book.InformationBook" class="form-control" style="height: 7.7rem" Model.Book.InformationBook"></textarea>
+
+                </div>
+                <div class="form-group ">
+                    <label Model.Book.CreateAt" class="control-label col-12">Create At</label>
+                    <input asp-for="Book.CreateAt" class="form-control col-6" style="margin-left: 24%" />
+                </div>
+                <div class="form-group">
+                    <label Model.Book.Image" class="control-label">Image Link</label>
+                    <input asp-for="Book.Image" class="form-control" />
+                </div>
+                
+            </div>
+            <div class="button">
+                <input type="submit" value="Create" class="btn button-28" style="" />
+            </div>
+
+        </form>
+    </div>
+
+        <div class="backlist"> 
+            <a asp-controller="Books" asp-action="IndexAdmin" type="button"
+               class="btn btn-outline-primary" style="margin-top: 5%;
+    margin-bottom: 2%">Back to List</a>
+        </div>
+
+ </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+<style>
+/* CSS */
+
+.img{
+    position: relative;
+}
+.img img{
+    height: 100vh;
+    width:100%;
+}
+.content{
+        position: absolute;
+        top: 15%;
+        left: 10%;
+        background: rgba(0,0,0,0.8);
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        padding: 40px 30px;
+        text-align: center;
+        color: #ff6600;
+}
+.content h1{
+    color: #ff6600;
+    font-weight: 700;
+}
+.button{
+    margin-left: 45%;
+}
+.btn{
+    background-color: white;
+    color: #ff6600;
+    border-radius: 5px;
+        padding: 7px 22px;
+        border:none;
+}
+.btn:hover{
+    background-color: #ff6600;
+    color: white;
+    transition: all 0.5s;
+}
+
+    .backlist{
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+    }
+footer{
+    display:none;
+}
+</style>

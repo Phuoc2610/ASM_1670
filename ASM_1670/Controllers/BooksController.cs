@@ -42,6 +42,31 @@ namespace ASM_1670.Controllers
             }
            
         }
+		[HttpGet]
+		public async Task<IActionResult> Create()
+		{
+			var currentUser = await userManager.GetUserAsync(User);
 
-    }
+			var categoriesInDb = _context.Categories
+				.Where(c => c.CategoryStatus == CategoryStatus.Successful && c.UserId == currentUser.Id).ToList();
+			CategoriesBookViewModel categoryBook = new CategoriesBookViewModel();
+			categoryBook.Categories = categoriesInDb;
+			return View(categoryBook);
+
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Create(Book book)
+		{
+			var currentUser = await userManager.GetUserAsync(User);
+
+			book.UserId = currentUser.Id;
+			_context.Add(book);
+			_context.SaveChanges();
+
+
+			return RedirectToAction("Index");
+		}
+
+	}
 }
