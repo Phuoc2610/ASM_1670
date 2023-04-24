@@ -1,0 +1,99 @@
+﻿@using ASM_APP_DEV.Models;
+
+@model IEnumerable<Book>
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="author" content="CodeHim">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css'>
+      <script>
+    
+
+    function AddToCart(id, quantity)
+    {
+
+
+    if(quantity - 1 < 0){
+        alert('San pham het hang');
+    }
+    else{
+           window.location.href = '@Url.Action("Create", "Orders")/' + id;
+
+    }
+}
+
+</script>
+   </head>
+
+   <style>
+       fotter{
+           display: none;
+       }
+   </style>
+   <body>
+
+      <header class="cd__intro">
+      </header>
+    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+            @foreach (var item in Model){
+
+    <div class="col hp">
+      <div class="card h-90 shadow-sm">
+        <a href="#">
+          <img src=@item.Image class="card-img-top" alt=" " width="350" height="300" />
+        </a>
+        <!-- <div class="label-top shadow-sm">Asus Rog</div>  -->
+        <div class="label-top shadow-sm">
+          <a class="text-white" href="#">msi</a>
+        </div>
+        <div class="card-body">
+          <div class="clearfix mb-3">
+                                <input id="id @item.Id" type="hidden" value="@item.Id" />
+                                <input id="quantityBook @item.QuantityBook" type="hidden" value="@item.QuantityBook" />
+
+                                <span class="float-start badge rounded-pill bg-success">Price: @item.PriceBook VND</span>
+                                <span  class="float-start badge rounded-pill bg-success">Quantity: @item.QuantityBook</span>
+          </div>
+          <h5 class="card-title">
+            <span >@item.NameBook</span>
+          </h5>
+          <div class="d-grid gap-2 my-4">
+
+             @if(User.IsInRole("user")){
+                <a  class="btn btn-warning bold-btn" onclick="AddToCart(
+                            document.getElementById('id @item.Id').value,
+                            document.getElementById('quantityBook @item.QuantityBook').value)">
+                            Add To Card</a>
+
+                <a asp-action="Detail" asp-route-id=@item.Id class="btn btn-warning bold-btn">Detail</a>
+             }
+
+          </div>
+          <div class="clearfix mb-1">
+
+            <span class="float-start"><a href="#"><i class="fas fa-question-circle"></i></a></span>
+
+            <span class="float-end">
+              
+             <i class="far fa-heart" style="cursor: pointer"></i>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+
+   </body>
+</html>
+
