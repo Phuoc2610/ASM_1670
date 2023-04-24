@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ASM_APP_DEV.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="cate">
+    <div class="img">
+        <img src="https://demo.w3layouts.com/demos_new/template_demo/24-01-2018/library_membership_form-demo_Free/902134896/web/images/bg.jpg" alt="#">
+    </div>
+    <div class="">
+        <table class="table table-bordered cate__content table-dark ">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NameCategory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoryStatus)
+                    </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NameCategory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryStatus)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button >
+            <a asp-action="Create" type="button" class="btn btn-primary button">Add New</a>
+        </button>
+    </div>
+
+</div>
+
+
+
+<style>
+/* CSS */
+    .img{
+        position:relative;
+
+    }
+
+        .img img {
+            height: 100vh;
+            width: 100%;
+        }
+    .cate__content{
+        position: absolute;
+        left: 10%;
+        top: 17%;
+        width: 80%;
+    }
+    .cate__content th {
+        text-align: center;
+        color: #ff6600;
+    }
+
+    .cate__content td {
+        text-align: center;
+    }
+
+    .cate__content .action {
+        width: 15%;
+    }
+    .button{
+        position: absolute;
+        top: 10%;
+        left: 10%;
+    }
+    footer {
+        display: none;
+    }
+
+
+</style>
