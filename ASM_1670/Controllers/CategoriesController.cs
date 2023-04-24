@@ -27,6 +27,23 @@ namespace ASM_1670.Controllers
             return View(categoriesInDb); 
         }
 
-       
-    }
+		//Create Category Data
+		[HttpGet]
+		public IActionResult Create()
+		{
+			return View();
+		}
+		[HttpPost]
+		public async Task<IActionResult> Create(Category category)
+		{
+			var currentUser = await userManager.GetUserAsync(User);
+
+			category.UserId = currentUser.Id;
+			category.CategoryStatus = CategoryStatus.Unconfirmed;
+			dbContext.Categories.Add(category);
+			dbContext.SaveChanges();
+			return RedirectToAction("Index", "Categories");
+		}
+
+	}
 }

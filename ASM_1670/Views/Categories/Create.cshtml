@@ -1,0 +1,95 @@
+﻿@model ASM_APP_DEV.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+<div class="container" style = "width: 600px; box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; margin-top: 10% ">
+  
+    <div class="card mb-4">
+      <div class="card-header py-3">
+        <h2 class="mb-0" style = "margin-left: 29%">Create Category</h2>
+      </div>
+      <div class="card-body">
+        <form asp-action="Create">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <label asp-for="NameCategory" class="control-label">Category</label>
+                <input asp-for="NameCategory" class="form-control" />
+                <span asp-validation-for="NameCategory" class="text-danger"></span>
+          </div>
+
+          
+          <div class="form-outline mb-4">
+            <input type="submit" asp-action="Create" value="Create" class="btn btn-primary container-fluid" />
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class = container>
+    <a asp-controller="Categories" asp-action="Index" type="button" 
+    class="btn btn-outline-primary" style = "margin-top: 5%;
+    margin-bottom: 2%">Back to List</a>
+    </div>
+</div>
+
+                <style>
+/* CSS */
+.button-28 {
+
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 15px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 35px;
+    min-width: 0;
+    outline: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 20%;
+    will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+</style>
