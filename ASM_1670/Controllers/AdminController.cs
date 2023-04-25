@@ -1,6 +1,6 @@
-﻿using ASM_APP_DEV.Data;
-using ASM_APP_DEV.Enums;
-using ASM_APP_DEV.Models;
+﻿using ASM_1670.Data;
+using ASM_1670.Enums;
+using ASM_1670.Models;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace ASM_APP_DEV.Controllers
+namespace ASM_1670.Controllers
 {
 
    
@@ -48,65 +48,7 @@ namespace ASM_APP_DEV.Controllers
 				return View(accounts);
 			}
         }
-        [HttpGet]
-			//get categories 
-        public IActionResult Categories()
-        {
-            var categories = context.Categories
-                .Where(categories => categories.CategoryStatus == CategoryStatus.Unconfirmed).ToList();
-
-            return View(categories);
-        }
-
-        public IActionResult AcceptCategory(int id)
-        {
-
-            var categoryInDb = context.Categories.SingleOrDefault(o => o.Id == id);
-
-            categoryInDb.CategoryStatus = CategoryStatus.Successful;
-            context.SaveChanges();
-            return RedirectToAction("Categories");
-        }
-        public IActionResult RejectCategory(int id)
-        {
-
-            var categoryInDb = context.Categories.SingleOrDefault(o => o.Id == id);
-
-            context.Remove(categoryInDb);
-            context.SaveChanges();
-
-            return RedirectToAction("Categories");
-        }
-
-
-
-        [HttpGet]
-        public IActionResult ChangePassword(string id)
-        {
-            var getUser = context.Users.SingleOrDefault(t => t.Id == id);
-
-            return View(getUser);
-        }
-
-
-        [HttpPost]
-        public IActionResult ChangePassword(string id, User user)
-        {
-            var getUser = context.Users.SingleOrDefault(t => t.Id == id);
-
-            var newPassword = user.PasswordHash;
-
-            if (newPassword == null)
-            {
-                ModelState.AddModelError("NoInput", "You have not input new password.");
-                return View();
-            }
-
-            getUser.PasswordHash = _userManager.PasswordHasher.HashPassword(getUser, newPassword);
-
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
+       
 
 
     }
