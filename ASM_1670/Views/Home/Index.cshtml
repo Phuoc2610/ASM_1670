@@ -1,0 +1,231 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<style>
+    .carousel{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .carousel__img img{
+        background: linear-gradient(0, rgba(0,0,0), rgba(0, 0, 0, 0.4));
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        height: 680px;
+        width: 100%;
+    }
+    .carousel__img{
+        position:relative;
+    }
+    .carousel__content{
+        position:absolute;
+        top: 65px;
+        right: 33%;
+        width: 55%;
+    }
+    .carousel__content h3 {
+            color: #fff;
+            font-size: 45px;
+            font-weight: 600;
+            line-height: 55px;
+    }
+
+    .carousel__content h2 {
+            color: transparent;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #fff;
+            font-size: 100px;
+            font-weight: 600;
+    }
+
+    .carousel__content p {
+            color: #eee;
+    }
+
+    .carousel__content button {
+        padding: 12px 35px;
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 700;
+        border-radius: 10px;
+        background-color: transparent;
+        color: #ff6600;
+        border-color: #ff6600;
+    }
+
+     .carousel__content button:hover {
+                background-color: #ff6600;
+                color: #212529;
+                transition: all 1s ease;
+            }
+    .carousel__content p {
+        padding: 25px 0;
+        font-size: 20px;
+    }
+
+  
+
+    .contact {
+        background-color: black;
+        width: 100%;
+    }
+    .contact__content {
+        padding: 50px 0;
+    }
+    .contact__detail a {
+        text-decoration: none;
+    }
+    .contact__detail ul {
+        list-style: none;
+        padding: 0;
+    }
+    .contact__detail h4 {
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+    }
+    .contact__detail h3 {
+        font-size: 30px;
+        font-weight: 600;
+        color: white;
+    }
+    .contact__detail h3:hover {
+            color: #ff6600;
+            cursor: pointer;
+            transition: all 0.5s ease;
+    }
+    .contact__detail p {
+        font-size: 17px;
+        color: #a5a2a1;
+        padding: 10px 0;
+    }
+    .contact__detail a {
+        font-size: 17px;
+        color: #a5a2a1;
+    }
+    .contact__detail a:hover {
+            color: #ff6600;
+            transition: all 0.5s;
+    }
+    .contact__detail li {
+        padding: 7px 0;
+    }
+    .contact__detail i {
+        width: 36px;
+        height: 36px;
+        color: #ff6600;
+        background-color: white;
+        line-height: 36px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    .contact__detail i:hover {
+            color: white;
+            background-color: #ff6600;
+            transition: all 0.5s ease;
+    }
+    .contact__detail input {
+        padding: 14px 20px;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 10px;
+        border: solid 2px transparent;
+    }
+    .contact__detail input:focus {
+            outline: none;
+            border-color: #ff6600;
+            transition: all 0.5s ease;
+    }
+    .contact__detail button {
+        width: 100%;
+        padding: 14px 45px;
+        background-color: #ff6600;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 10px;
+        border: solid 2px transparent;
+        margin-top: 15px;
+    }
+    .contact__detail button:hover {
+            color: black;
+            transition: all 0.5s ease;
+    }
+
+</style>
+
+    <section class="carousel container-fluid">
+    <div class="carousel__img">
+        <img src="https://demo.w3layouts.com/demos_new/template_demo/24-01-2018/library_membership_form-demo_Free/902134896/web/images/bg.jpg" alt="#">
+    </div>
+        <div class="carousel__content">
+            <h3>The best choice for you</h3>
+        <h2>Cyber Book</h2>
+        <p>
+            We are dedicated to the safety of our guests and employees and have updated our safety measures.
+            Lorem ipsum dolor sit amet elit. Provident. fugit odit? Fugit ipsam. Sed ac ex. Nam mauris velit, ac
+            cursus quis, leo.
+        </p>
+        <button>Read More</button>
+        </div>
+        
+    </section>
+
+
+<section class="contact " id="Contact">
+    <div class="container contact__content">
+        <div class="row">
+            <div class="contact__detail col-lg-4 col-sm-7 col-md-6 col-12">
+                <h3>
+                    CyberBook
+                </h3>
+                <p>
+                    We are dedicated to the safety of our guests and employees and have updated our safety measures.
+                    We believe in Simple, Creative, Modern and Flexible Design Standards with a Retina and
+                    Responsive Approach. Browse the amazing Features this template offers.
+                </p>
+                <div class="contact__icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+            </div>
+            <div class="contact__detail col-lg-2 col-sm-5 col-md-6 col-6">
+                <h4>Usefull Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Blog posts</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+            </div>
+            <div class="contact__detail col-lg-2 col-sm-5 col-md-6 col-6">
+                <h4>More Info</h4>
+                <ul>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#">Vision & Values</a></li>
+                    <li><a href="#">Awards</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="contact__detail col-lg-4 col-sm-7 col-md-6 col-12">
+                <h4>Subscribe to our Newsletter</h4>
+                <p>Enter your email and receive the latest news, updates and special offers from us.</p>
+                <input type="email" placeholder="Your Email Address">
+                <button>Subscribe Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

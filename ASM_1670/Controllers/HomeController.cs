@@ -1,4 +1,4 @@
-﻿using ASM_APP_DEV.Models;
+﻿using ASM_1670.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASM_APP_DEV.Controllers
+namespace ASM_1670.Controllers
 {
 	public class HomeController : Controller
 	{
@@ -18,10 +18,6 @@ namespace ASM_APP_DEV.Controllers
 			_logger = logger;
 		}
 
-		public IActionResult Index()
-		{
-			return View();
-		}
 
 		public IActionResult Privacy()
 		{
