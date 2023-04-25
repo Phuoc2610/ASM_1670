@@ -48,8 +48,37 @@ namespace ASM_1670.Controllers
 				return View(accounts);
 			}
         }
-       
+
+		[HttpGet]
+		//get categories 
+		public IActionResult Categories()
+		{
+			var categories = context.Categories
+				.Where(categories => categories.CategoryStatus == CategoryStatus.Unconfirmed).ToList();
+
+			return View(categories);
+		}
+
+		public IActionResult AcceptCategory(int id)
+		{
+
+			var categoryInDb = context.Categories.SingleOrDefault(o => o.Id == id);
+
+			categoryInDb.CategoryStatus = CategoryStatus.Successful;
+			context.SaveChanges();
+			return RedirectToAction("Categories");
+		}
+		public IActionResult RejectCategory(int id)
+		{
+
+			var categoryInDb = context.Categories.SingleOrDefault(o => o.Id == id);
+
+			context.Remove(categoryInDb);
+			context.SaveChanges();
+
+			return RedirectToAction("Categories");
+		}
 
 
-    }
+	}
 }
