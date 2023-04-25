@@ -67,6 +67,14 @@ namespace ASM_1670.Controllers
 
 			return RedirectToAction("Index");
 		}
+		//Detail Book Data
+		[HttpGet]
+		public IActionResult Detail(int id)
+		{
+			var bookInDb = _context.Books.SingleOrDefault(b => b.Id == id);
+
+			return View(bookInDb);
+		}
 
 	}
 }
