@@ -76,5 +76,30 @@ namespace ASM_1670.Controllers
 			return View(bookInDb);
 		}
 
+		//Edit Book Data
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			var bookInDb = _context.Books.SingleOrDefault(b => b.Id == id);
+
+			return View(bookInDb);
+		}
+		[HttpPost]
+		public IActionResult Edit(Book book)
+		{
+
+			var bookInDb = _context.Books.SingleOrDefault(b => b.Id == book.Id);
+			bookInDb.NameBook = book.NameBook;
+			bookInDb.PriceBook = book.PriceBook;
+			bookInDb.Image = book.Image;
+			bookInDb.InformationBook = book.InformationBook;
+			bookInDb.QuantityBook = book.QuantityBook;
+
+
+			_context.Update(bookInDb);
+			_context.SaveChanges();
+
+			return RedirectToAction("Index");
+		}
 	}
 }
