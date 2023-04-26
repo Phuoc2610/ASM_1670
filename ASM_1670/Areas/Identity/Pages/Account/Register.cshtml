@@ -1,0 +1,120 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    .register__img {
+        position: relative;
+    }
+    .register__form {
+        position: absolute;
+        width: 500px;
+        min-height: 350px;
+        margin: 50px 0 auto;
+        left: 35%;
+        background: rgba(0,0,0,0.8);
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        padding: 40px 30px;
+        text-align: center;
+    }
+
+        .register__form h1 {
+            color: #ff6600;
+        }
+
+        .register__form input {
+        padding: 10px 60px;
+        margin: 5px 0;
+        color: #ff6600;
+        border: solid 2px #e7e7e7;
+        text-align: center;
+        
+    }
+
+        .register__form .form-group input:focus, .register__form .form-group input:valid{
+         border: solid 2px #ff6600;
+         color: #ff6600;
+     }
+
+        .register__form .form-group select{
+            text-align: center;
+            color:black;
+        }
+
+        .register__form .form-group select:focus {
+                color: #ff6600;
+        }
+        .register__form button {
+            padding: 10px 50px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            background: #ff6600;
+            transition: all 0.5s;
+            border: none;
+        }
+
+            .register__form button:hover {
+                transform: translateY(-5px);
+                color: #ff6600;
+                background: #4c4957;
+            }
+
+
+    footer {
+        display: none;
+    }
+</style>
+
+
+
+<div class="register row container-fluid">
+    <div class="register__img">
+        <img src="https://demo.w3layouts.com/demos_new/template_demo/24-01-2018/library_membership_form-demo_Free/902134896/web/images/bg.jpg" alt="#">
+    </div>
+    <div class="register__form container">
+        <h1>@ViewData["Title"]</h1>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Input.FullName" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="ConfirmPassword" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Input.Address" class="form-control" placeholder="Address" />
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="Input.Role" class="form-control"
+                        asp-items="@Model.RoleSelectList">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
