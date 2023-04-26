@@ -101,5 +101,11 @@ namespace ASM_1670.Controllers
 
 			return RedirectToAction("Index");
 		}
+
+		[HttpGet]
+		public IActionResult Help()
+		{
+			return View();
+		}
 	}
 }
