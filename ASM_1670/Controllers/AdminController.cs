@@ -79,6 +79,32 @@ namespace ASM_1670.Controllers
 			return RedirectToAction("Categories");
 		}
 
+        [HttpGet]
+        public IActionResult ChangePassword(string id)
+        {
+            var getUser = context.Users.SingleOrDefault(t => t.Id == id);
 
-	}
+            return View(getUser);
+        }
+
+
+        [HttpPost]
+        public IActionResult ChangePassword(string id, User user)
+        {
+            var getUser = context.Users.SingleOrDefault(t => t.Id == id);
+
+            var newPassword = user.PasswordHash;
+
+            if (newPassword == null)
+            {
+                ModelState.AddModelError("NoInput", "You have not input new password.");
+                return View();
+            }
+
+            getUser.PasswordHash = _userManager.PasswordHasher.HashPassword(getUser, newPassword);
+
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
 }
