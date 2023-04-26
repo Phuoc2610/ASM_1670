@@ -1,0 +1,133 @@
+﻿@model IEnumerable<ASM_APP_DEV.Models.Book>
+
+@{
+    ViewData["Title"] = "IndexAdmin";
+}
+
+<div class="book">
+    <div class="img">
+        <img src="https://demo.w3layouts.com/demos_new/template_demo/24-01-2018/library_membership_form-demo_Free/902134896/web/images/bg.jpg" alt="#">
+    </div>
+    <div class="">
+        <table class="table table-bordered book__content table-dark ">
+            <thead>
+               <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameBook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityBook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceBook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InformationBook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateAt)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>*@
+            <th>Action</th>
+        </tr>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NameBook)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuantityBook)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PriceBook)
+                        </td>
+
+                        <td class="label_title">
+                            @Html.DisplayFor(modelItem => item.InformationBook)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateAt)
+                        </td>
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                    </td>*@
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                            <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-success" >Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button >
+            <a asp-action="Create" type="button" class="btn btn-primary button" >Create New</a>
+        </button>
+    </div>
+
+</div>
+
+
+
+
+
+<style>
+/* CSS */
+    .img {
+        position: relative;
+    }
+
+        .img img {
+            height: 100vh;
+            width: 100%;
+        }
+
+    .book__content {
+        position: absolute;
+        left: 8%;
+        top: 17%;
+        width: 80%;
+    }
+
+        .book__content th {
+            text-align: center;
+            color: #ff6600;
+        }
+
+        .book__content td {
+            text-align: center;
+        }
+
+        .book__content .action {
+            width: 30%;
+        }
+
+    .button {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+    }
+.label_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 88%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+
+}
+footer{
+    display: none;
+}
+</style>
+<script>$(".label_title").each(function(){if ($(this).text()
+    .length > 40) {$(this).text($(this).text()
+    .substr(0, 40));$(this).append('...');}});</script>
