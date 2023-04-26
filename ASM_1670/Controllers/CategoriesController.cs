@@ -44,6 +44,15 @@ namespace ASM_1670.Controllers
 			dbContext.SaveChanges();
 			return RedirectToAction("Index", "Categories");
 		}
-
-	}
+        //Delete Category Data
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var category = dbContext.Categories.FirstOrDefault(c => c.Id == id);
+            dbContext.Remove(category);
+            dbContext.SaveChanges();
+            return RedirectToAction("Index", "Categories");
+        }
+    }
+}
 }
