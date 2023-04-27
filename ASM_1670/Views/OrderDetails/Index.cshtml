@@ -1,0 +1,224 @@
+﻿@using ASM_APP_DEV.ViewModel
+@model ViewModelCart
+@{
+    ViewData["Title"] = "Index";
+}
+<button style="border: none;">
+    <a asp-controller="Orders" class="btn btn-primary" asp-action="Index">List Orders</a>
+</button>
+@if (Model.OrderDetails.Count != 0)
+{
+    <form asp-action="BuyBooks" asp-controller="OrderDetails" method="post">
+
+        <input asp-for="@Model.Order.Id" type="hidden" value="@Model.Order.Id" id="id @Model.Order.Id" />
+        <input asp-for="@Model.Order.OrderStatus" type="hidden" value="@Model.Order.OrderStatus" id="id @Model.Order.OrderStatus" />
+        <input asp-for="@Model.Order.PriceOrder" type="hidden" value="@Model.Order.Id" id="id @Model.Order.PriceOrder" />
+
+
+
+
+        <table class="table table-bordered book__content table-dark col-8 ">
+            <thead>
+                <tr>
+                    <th style="display: none">
+                        Order
+                    </th>
+                    <th>
+                        Name Product
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th class="action">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.OrderDetails.Count; i++)
+                {
+                    <tr>
+                        <input asp-for="@Model.OrderDetails[i].Id" type="hidden" value="@Model.OrderDetails[i].Id" id="id @Model.OrderDetails[i].Id" />
+
+                        <td style="display: none">
+                            @Html.DisplayFor(modelItem => Model.OrderDetails[i].Order.Id)
+                            <input asp-for="@Model.OrderDetails[i].IdOrder" type="hidden" value="@Model.OrderDetails[i].Order.Id" />
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.OrderDetails[i].Book.NameBook)
+                            <input asp-for="@Model.OrderDetails[i].IdBook" type="hidden" value="@Model.OrderDetails[i].IdBook" />
+
+                        </td>
+                        <td>
+
+                            @if (Model.OrderDetails[i].Order.OrderStatus != ASM_APP_DEV.Enums.OrderStatus.Unconfirmed)
+                            {
+
+                                @Html.DisplayFor(modelItem => Model.OrderDetails[i].Quantity)
+
+                            }
+                            else
+                            {
+                                <input type="hidden" value="@Model.OrderDetails[i].Quantity" id="quantityBuy @Model.OrderDetails[i].Id" />
+                                <input type="hidden" value="@Model.OrderDetails[i].Book.QuantityBook" id="quantityBook @Model.OrderDetails[i].Id" />
+
+                                <a class="btn btn-primary bold-btn"
+                       onclick="trusoluong(
+                            document.getElementById('id @Model.OrderDetails[i].Id').value,
+                            document.getElementById('quantityBuy @Model.OrderDetails[i].Id').value,
+document.getElementById('quantityBook @Model.OrderDetails[i].Id').value )">-</a>
+
+                                <input asp-for="@Model.OrderDetails[i].Quantity" type="hidden" />
+                                @Html.DisplayFor(modelItem => Model.OrderDetails[i].Quantity)
+
+                                <a class="btn btn-primary bold-btn" onclick="congsoluong(
+                            document.getElementById('id @Model.OrderDetails[i].Id').value,
+                            document.getElementById('quantityBuy @Model.OrderDetails[i].Id').value,
+                            document.getElementById('quantityBook @Model.OrderDetails[i].Id').value )">+</a>
+
+                            }
+                        </td>
+                        <td>
+                            <input asp-for="@Model.OrderDetails[i].Price" type="hidden" value="@Model.OrderDetails[i].Price" id="price @Model.OrderDetails[i].Id" />
+                            <p id="demo @Model.OrderDetails[i].Id">@Model.OrderDetails[i].Price </p>
+                            <input asp-for="@Model.OrderDetails[i].Book.PriceBook" type="hidden" value="@Model.OrderDetails[i].Book.PriceBook" />
+
+                        </td>
+                        <td>
+                            <a asp-controller="Books" asp-action="Detail" class="btn btn-info" asp-route-id="@Model.OrderDetails[i].IdBook">View Books</a>
+                            @if (Model.OrderDetails[i].Order.OrderStatus == ASM_APP_DEV.Enums.OrderStatus.Unconfirmed)
+                            {
+                                <a asp-controller="OrderDetails" asp-action="Delete" class="btn btn-danger" asp-route-id="@Model.OrderDetails[i].Id">Delete</a>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <div class="col-4 purchase" style="float: right">
+
+            <div class="rounded d-flex flex-column p-2" style="background-color: #d3d3d3; ">
+                <div class="p-2 me-3">
+                    <h4 style="text-align:center; ">Order Recap</h4>
+                </div>
+                <div class="p-2 d-flex">
+                    <div class="col-8" >Name: </div>
+                    <div class="ms-auto ">@Model.FullName</div>
+
+                </div>
+                <div class="p-2 d-flex">
+                    <div class="col-8" >Address: </div>
+                    <div class="ms-auto " >@Model.Address</div>
+                </div>
+
+                <div class="border-top px-2 mx-2" ></div>
+                <div class="p-2 d-flex pt-3">
+                    <div class="col-8"><b >Total Order:</b></div>
+                    <div class="ms-auto"><b class="text-success">@Model.Order.PriceOrder VND</b></div>
+                </div>
+
+
+
+            </div>
+            @if (Model.Order.OrderStatus == ASM_APP_DEV.Enums.OrderStatus.Unconfirmed)
+            {
+                <button type="submit" class="btn btn-info">Purchase</button>
+
+            }
+        </div>
+    </form>
+
+}
+else
+{
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Cart</h5>
+                    </div>
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center">
+                            <img src="https://cdn.dribbble.com/users/44167/screenshots/4199208/media/e2f1188c18430f9ab0af074ae7a88ee8.png?compress=1&resize=400x300&vertical=top" width="330" height="330" class="img-fluid mb-4 mr-3">
+                            <h5><strong>Your Cart is Empty</strong></h5>
+                            <h6>Add something to make me happy :)</h6>
+                            <a asp-action="Index" asp-controller="Books" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Continue shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+<script>
+    function congsoluong(id, quantityBuy, quantityBook) {
+        console.log(quantityBook);
+        console.log(quantityBuy++);
+        if (quantityBuy++ <= quantityBook) {
+            window.location.href = '@Url.Action("TangSoLuong", "OrderDetails")/' + id;
+        }
+        else {
+
+            alert('So luong lon hon trong kho');
+        }
+    }
+    function trusoluong(id, quantityBuy) {
+        console.log(quantityBuy);
+
+        if (quantityBuy - 1 > 0) {
+            window.location.href = '@Url.Action("TruSoLuong", "OrderDetails")/' + id;
+        }
+        else {
+            alert('So luong phai khac 0');
+        }
+    }
+    var error = '@TempData["err"]';
+    if (error) {
+        alert(error);
+    }
+</script>
+
+<style>
+    th {
+        text-align: center;
+        color: #ff6600;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .action {
+        width: 30%;
+    }
+    .table{
+        width: 66%;
+    }
+    .purchase{
+        width: 40%;
+        position: absolute;
+        top: 15%;
+        right: 1%;
+    }
+    .border-top{
+        color:black;
+    }
+    footer{
+        display: none;
+    }
+</style>

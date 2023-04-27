@@ -12,6 +12,8 @@ namespace ASM_1670.Models
         public int QuantityBook { get; set; }
         public int PriceBook { get; set; }
         public string InformationBook { get; set; }
+
+        public string Author { get; set; }
         public DateTime CreateAt { get; set; }
         public string Image { get; set; }
 
