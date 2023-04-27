@@ -73,5 +73,40 @@ namespace ASM_1670.Controllers
             context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult BuyBooks(ViewModelCart viewModelCart)
+        {
+            viewModelCart.Order.PriceOrder = 0;
+
+            foreach (var item in viewModelCart.OrderDetails)
+            {
+                var bookInDb = context.Books.SingleOrDefault(b => b.Id == item.IdBook);
+                var orderDetail = context.OrderDetails.SingleOrDefault(o => o.Id == item.Id);
+                if (bookInDb.QuantityBook < orderDetail.Quantity)
+                {
+                    TempData["err"] = "Quantity Book In Databae: " + bookInDb.QuantityBook;
+                    return RedirectToAction("Index", "OrderDetails");
+                }
+                else
+                {
+                    orderDetail.Quantity = item.Quantity;
+                    orderDetail.Price = item.Book.PriceBook * item.Quantity;
+                    bookInDb.QuantityBook -= orderDetail.Quantity;
+
+                    context.Update(orderDetail);
+                    viewModelCart.Order.PriceOrder += orderDetail.Price;
+                    context.SaveChanges();
+                }
+
+            }
+            var orderInDb = context.Orders.SingleOrDefault(o => o.Id == viewModelCart.Order.Id);
+            orderInDb.PriceOrder = viewModelCart.Order.PriceOrder;
+            orderInDb.OrderStatus = OrderStatus.InProgress;
+            context.Update(orderInDb);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Orders");
+        }
     }
 } 
