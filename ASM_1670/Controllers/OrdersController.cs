@@ -40,7 +40,6 @@ namespace ASM_1670.Controllers
 
 		public async Task<IActionResult> Create(int id)
 		{
-
 			var currentUser = await userManager.GetUserAsync(User);
 			var orderUnconfirmInDb = context.Orders.Include(o => o.OrderDetails)
 				.SingleOrDefault(o => o.OrderStatus == OrderStatus.Unconfirmed && o.UserId == currentUser.Id);
@@ -52,7 +51,6 @@ namespace ASM_1670.Controllers
 			}
 			if (orderUnconfirmInDb == null)
 			{
-
 				var order = new Order();
 				order.UserId = currentUser.Id;
 				order.OrderStatus = Enums.OrderStatus.Unconfirmed;
