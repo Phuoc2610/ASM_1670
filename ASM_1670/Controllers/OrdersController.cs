@@ -1,7 +1,7 @@
-﻿using ASM_APP_DEV.Data;
-using ASM_APP_DEV.Enums;
-using ASM_APP_DEV.Models;
-using ASM_APP_DEV.ViewModel;
+﻿using ASM_1670.Data;
+using ASM_1670.Enums;
+using ASM_1670.Models;
+using ASM_1670.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +12,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASM_APP_DEV.Controllers
+namespace ASM_1670.Controllers
 {
     public class OrdersController : Controller
     {
